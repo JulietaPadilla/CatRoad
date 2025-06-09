@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
-#include <JuegoCatCross.h>
+#include "JuegoCatCross.h"
+
 
 int main()
 {
