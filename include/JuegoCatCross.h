@@ -5,6 +5,8 @@
 #include <Ventana.h>
 #include <Puntaje.h>
 #include <SFML/Graphics.hpp>
+#include "Coleccionable.h"
+#include <vector>
 
 class JuegoCatCross {
 private:
@@ -13,9 +15,38 @@ private:
     Sonido sonido;
     Ventana ventana;
     Puntaje puntaje;
+    std::vector<Coleccionable> coleccionables; // Lista de coleccionables
 
 public:
     JuegoCatCross() {}
+
+    void inicializarColeccionables() {
+        Coleccionable c1;
+        c1.cargarTextura("assets/coleccionable1.png");
+        c1.setPosicion(100, 200);
+        coleccionables.push_back(c1);
+
+        Coleccionable c2;
+        c2.cargarTextura("assets/coleccionable2.png");
+        c2.setPosicion(300, 400);
+        coleccionables.push_back(c2);
+    }
+
+    void dibujarColeccionables(sf::RenderWindow& ventana) {
+        for (auto& coleccionable : coleccionables) {
+            coleccionable.dibujar(ventana);
+        }
+    }
+
+    void verificarColisionesColeccionables() {
+        sf::FloatRect jugadorBounds = personaje.getSprite(); // Obtener los límites del sprite del personaje
+        for (auto& coleccionable : coleccionables) {
+            if (!coleccionable.esRecolectado() && coleccionable.getSprite().getGlobalBounds().intersects(jugadorBounds)) {
+                coleccionable.recolectar();
+                puntaje.Aumentar(10); // Incrementar puntaje al recolectar
+            }
+        }
+    }
 
     void IniciarJuego() {
 
@@ -27,6 +58,7 @@ public:
         if (!font.loadFromFile("arial.ttf")) {
             // Manejo de error: fuente no encontrada
         }
+        inicializarColeccionables();
         while (ventana.EstaAbierta()) {
             ventana.ManejarEventos();
 
@@ -44,6 +76,8 @@ public:
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
                 personaje.MoverDerecha(anchoVentana);
             }
+            dibujarColeccionables(ventana.window);
+            verificarColisionesColeccionables();
             ventana.Mostrar();
         
             //manda llamar el metodo 

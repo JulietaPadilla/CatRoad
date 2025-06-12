@@ -6,9 +6,9 @@ class Ventana {
 private:
     int ancho;
     int alto;
-    sf::RenderWindow window;
-
+    
 public:
+    sf::RenderWindow window;
     Ventana() : ancho(800), alto(600), window(sf::VideoMode(ancho, alto), "Juego") {}
 
     void Mostrar() {
