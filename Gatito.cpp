@@ -11,7 +11,7 @@ public:
 
         // Cargar la imagen desde un archivo
         
-        if (!texture.loadFromFile("assets/images/pikachu.png"))
+        if (!texture.loadFromFile("assets/images/mi_imagen.png"))
         {
         
         }

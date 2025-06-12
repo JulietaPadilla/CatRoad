@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <SFML/Graphics.hpp> // Asegúrate de incluir SFML/Graphics.hpp para la clase sf::RenderWindow
 
 class Obstaculo {
 private:
@@ -47,4 +48,10 @@ public:
     }
     // Método para mover el obstáculo (puede ser redefinido para obstáculos móviles)
     void Mover() {}
+
+    // Método para actualizar el estado del obstáculo
+    void Actualizar();
+
+    // Método para renderizar el obstáculo
+    void Renderizar(sf::RenderWindow& ventana) const;
 };
