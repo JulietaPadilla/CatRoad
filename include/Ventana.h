@@ -7,11 +7,16 @@ class Ventana {
 private:
     int ancho;
     int alto;
+<<<<<<< HEAD
     sf::RenderWindow window;
     sf::Texture textura;      // Almacena la textura de la imagen
     sf::Sprite sprite;        // Sprite para mostrar la textura
 
+=======
+    
+>>>>>>> 4cd06f38e107053c4a5004e731af4665d6594052
 public:
+    sf::RenderWindow window;
     Ventana() : ancho(800), alto(600), window(sf::VideoMode(ancho, alto), "Juego") {}
 
     // Carga una imagen desde la ruta especificada

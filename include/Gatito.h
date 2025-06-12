@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <SFML/Graphics/Rect.hpp> // Uso de sf::FloatRect
 
 class Gatito {
 private:
@@ -36,4 +37,9 @@ public:
     void ganarVida() { vidas++; }
     void consumirEnergia(int e) { energia -= e; }
     void recargarEnergia(int e) { energia += e; }
+
+    sf::FloatRect getSprite() const {
+        return sf::FloatRect(static_cast<float>(posicionX), static_cast<float>(posicionY), 64.0f, 64.0f); // Suponiendo un tamaño de sprite de 64x64
+    }
+
 };
