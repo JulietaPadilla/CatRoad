@@ -87,16 +87,33 @@ public:
 
     void MostrarPantallaInicio() {
         sf::RenderWindow ventana(sf::VideoMode(800, 600), "Cat Road");
+
+        // Cargar la textura del fondo
+        sf::Texture fondoTexture;
+        if (!fondoTexture.loadFromFile("assets/images/fondo_inicio.png")) {
+            throw std::runtime_error("No se pudo cargar la textura del fondo");
+        }
+        sf::Sprite fondoSprite(fondoTexture);
+
+        // Cargar la fuente para el texto
         sf::Font fuente;
         if (!fuente.loadFromFile("assets/fonts/Platinum Sign.ttf")) {
             throw std::runtime_error("No se pudo cargar la fuente");
         }
 
+        // Configurar el texto del título
         sf::Text titulo("CAT ROAD", fuente, 50);
+        titulo.setFillColor(sf::Color::White);
         titulo.setPosition(250, 100);
 
-        sf::Text opciones("1. Jugar\n2. Salir", fuente, 30);
-        opciones.setPosition(300, 300);
+        // Configurar las opciones del menú
+        sf::Text opcionJugar("Presiona Enter para Jugar", fuente, 30);
+        opcionJugar.setFillColor(sf::Color::White);
+        opcionJugar.setPosition(200, 300);
+
+        sf::Text opcionSalir("Presiona Esc para Salir", fuente, 30);
+        opcionSalir.setFillColor(sf::Color::White);
+        opcionSalir.setPosition(200, 400);
 
         while (ventana.isOpen()) {
             sf::Event evento;
@@ -104,20 +121,20 @@ public:
                 if (evento.type == sf::Event::Closed) {
                     ventana.close();
                 }
-                if (evento.type == sf::Event::KeyPressed) {
-                    if (evento.key.code == sf::Keyboard::Num1) {
-                        ventana.close();
-                        return;
-                    } else if (evento.key.code == sf::Keyboard::Num2) {
-                        ventana.close();
-                        exit(0);
-                    }
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+                    ventana.close(); // Cerrar la pantalla de inicio y pasar al juego
+                }
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+                    ventana.close();
+                    exit(0); // Salir del juego
                 }
             }
 
             ventana.clear();
+            ventana.draw(fondoSprite);
             ventana.draw(titulo);
-            ventana.draw(opciones);
+            ventana.draw(opcionJugar);
+            ventana.draw(opcionSalir);
             ventana.display();
         }
     }

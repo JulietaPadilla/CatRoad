@@ -1,15 +1,9 @@
 #include <SFML/Graphics.hpp>
-#include <JuegoCatCross.h>
+#include "JuegoCatCross.h"
 
-int main()
-{
+int main() {
     JuegoCatCross juego;
-
-    // Mostrar pantalla de inicio
-    juego.MostrarPantallaInicio();
-
-    // Iniciar el juego
-    juego.IniciarJuego();
-
+    juego.MostrarPantallaInicio(); // Mostrar la pantalla de inicio
+    juego.IniciarJuego(); // Iniciar el juego principal
     return 0;
 }
